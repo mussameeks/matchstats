@@ -5,7 +5,7 @@ const Upcoming = () => {
   const [upcomingMatches, setUpcomingMatches] = useState([]);
 
   useEffect(() => {
-    const filtered = dummyData.filter(match => match.status === "upcoming");
+    const filtered = .filter(match => match.status === "upcoming");
     setUpcomingMatches(filtered);
   }, []);
 

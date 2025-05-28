@@ -7,9 +7,9 @@ const Home = () => {
   const [upcoming, setUpcoming] = useState([]);
 
   useEffect(() => {
-    const liveMatches = dummyData.filter(m => m.status === "live");
-    const finishedMatches = dummyData.filter(m => m.status === "finished");
-    const upcomingMatches = dummyData.filter(m => m.status === "upcoming");
+    const liveMatches = .filter(m => m.status === "live");
+    const finishedMatches = .filter(m => m.status === "finished");
+    const upcomingMatches = .filter(m => m.status === "upcoming");
 
     setLive(liveMatches);
     setFinished(finishedMatches);

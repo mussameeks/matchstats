@@ -5,7 +5,7 @@ const Live = () => {
   const [liveMatches, setLiveMatches] = useState([]);
 
   useEffect(() => {
-    const filtered = dummyData.filter(match => match.status === "live");
+    const filtered = .filter(match => match.status === "live");
     setLiveMatches(filtered);
   }, []);
 

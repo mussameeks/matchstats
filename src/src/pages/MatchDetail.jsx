@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 
 const MatchDetail = () => {
   const { id } = useParams();
-  const match = dummyData.find(m => m.id === id);
+  const match = .find(m => m.id === id);
 
   if (!match) {
     return <p>Match not found. <Link to="/">Go back home</Link></p>;

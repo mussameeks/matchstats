@@ -5,7 +5,7 @@ const Finished = () => {
   const [finishedMatches, setFinishedMatches] = useState([]);
 
   useEffect(() => {
-    const filtered = dummyData.filter(match => match.status === "finished");
+    const filtered = .filter(match => match.status === "finished");
     setFinishedMatches(filtered);
   }, []);
 
