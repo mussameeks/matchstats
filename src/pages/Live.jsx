@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
-import dummyData from "../assets/dummydata.json";
+import { getLiveMatches } from "../api/sportsmonks";
 import MatchList from "../components/MatchList";
 
 const Live = () => {
-  const [liveMatches, setLiveMatches] = useState([]);
+  const [matches, setMatches] = useState([]);
 
   useEffect(() => {
-    const filtered = dummyData.filter(match => match.status === "live");
-    setLiveMatches(filtered);
+    const fetchData = async () => {
+      try {
+        const liveMatches = await getLiveMatches();
+        setMatches(liveMatches);
+      } catch (error) {
+        console.error("Error fetching live matches:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
-    <div className="live-page">
-      <h2>🔥 Live Matches</h2>
-      <MatchList matches={liveMatches} />
+    <div className="live-page p-6">
+      <h2 className="text-center text-xl font-bold mt-6">🔥 Live Matches</h2>
+      <MatchList matches={matches} />
     </div>
   );
 };

@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
-import dummyData from "../assets/dummydata.json";
+import { getUpcomingMatches } from "../api/sportsmonks";
 import MatchList from "../components/MatchList";
 
 const Upcoming = () => {
-  const [upcomingMatches, setUpcomingMatches] = useState([]);
+  const [matches, setMatches] = useState([]);
 
   useEffect(() => {
-    const filtered = dummyData.filter(match => match.status === "upcoming");
-    setUpcomingMatches(filtered);
+    const fetchMatches = async () => {
+      try {
+        const data = await getUpcomingMatches();
+        setMatches(data);
+      } catch (error) {
+        console.error("Error fetching upcoming matches:", error);
+      }
+    };
+
+    fetchMatches();
   }, []);
 
   return (
-    <div className="upcoming-page">
-      <h2>📅 Upcoming Matches</h2>
-      <MatchList matches={upcomingMatches} />
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-4 text-center">📅 Upcoming Matches</h2>
+      <MatchList matches={matches} />
     </div>
   );
 };
