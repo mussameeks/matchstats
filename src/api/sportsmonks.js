@@ -63,3 +63,30 @@ export const getUpcomingMatches = async () => {
     league: match.league?.data?.name || "Unknown",
   }));
 };
+
+
+export const getFinishedMatches = async () => {
+  const res = await api.get("/fixtures", {
+    params: {
+      include: "localTeam,visitorTeam,league",
+      sort: "-starting_at",
+      status: "finished",
+      per_page: 10,
+    },
+  });
+
+  return res.data.data.map(match => ({
+    id: match.id.toString(),
+    teams: {
+      home: match.localTeam?.data?.name || "Home",
+      away: match.visitorTeam?.data?.name || "Away",
+    },
+    status: "finished",
+    score: {
+      home: match.scores?.localteam_score ?? 0,
+      away: match.scores?.visitorteam_score ?? 0,
+    },
+    startTime: match.time?.starting_at?.date_time || match.starting_at,
+    league: match.league?.data?.name || "Unknown",
+  }));
+};
