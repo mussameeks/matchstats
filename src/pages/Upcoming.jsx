@@ -1,0 +1,21 @@
+import React, { useEffect, useState } from "react";
+import dummyData from "../assets/dummydata.json";
+import MatchList from "../components/MatchList";
+
+const Upcoming = () => {
+  const [upcomingMatches, setUpcomingMatches] = useState([]);
+
+  useEffect(() => {
+    const filtered = dummyData.filter(match => match.status === "upcoming");
+    setUpcomingMatches(filtered);
+  }, []);
+
+  return (
+    <div className="upcoming-page">
+      <h2>📅 Upcoming Matches</h2>
+      <MatchList matches={upcomingMatches} />
+    </div>
+  );
+};
+
+export default Upcoming;
