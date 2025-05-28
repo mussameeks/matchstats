@@ -18,7 +18,7 @@ const MatchCard = ({ match }) => {
   return (
     <div className="bg-white shadow-md rounded-xl p-4 w-full max-w-sm transition hover:scale-[1.02]">
       <div className="flex justify-between items-center mb-2">
-        <span className={\`uppercase text-sm font-semibold \${statusColor[status]}\`}>{status}</span>
+        <span className={`uppercase text-sm font-semibold ${statusColor[status]}`}>{status}</span>
         <span className="text-xs text-gray-400">{league}</span>
       </div>
 
