@@ -6,21 +6,21 @@ const Live = () => {
   const [matches, setMatches] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchLive = async () => {
       try {
-        const liveMatches = await getLiveMatches();
-        setMatches(liveMatches);
-      } catch (error) {
-        console.error("Error fetching live matches:", error);
+        const data = await getLiveMatches();
+        setMatches(data);
+      } catch (err) {
+        console.error("Error fetching live matches:", err);
       }
     };
 
-    fetchData();
+    fetchLive();
   }, []);
 
   return (
-    <div className="live-page p-6">
-      <h2 className="text-center text-xl font-bold mt-6">🔥 Live Matches</h2>
+    <div className="p-6">
+      <h2 className="text-2xl font-bold text-center mb-4">🔥 Live Matches</h2>
       <MatchList matches={matches} />
     </div>
   );

@@ -6,21 +6,21 @@ const Upcoming = () => {
   const [matches, setMatches] = useState([]);
 
   useEffect(() => {
-    const fetchMatches = async () => {
+    const fetchUpcoming = async () => {
       try {
         const data = await getUpcomingMatches();
         setMatches(data);
-      } catch (error) {
-        console.error("Error fetching upcoming matches:", error);
+      } catch (err) {
+        console.error("Error fetching upcoming matches:", err);
       }
     };
 
-    fetchMatches();
+    fetchUpcoming();
   }, []);
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4 text-center">📅 Upcoming Matches</h2>
+      <h2 className="text-2xl font-bold text-center mb-4">📅 Upcoming Matches</h2>
       <MatchList matches={matches} />
     </div>
   );
