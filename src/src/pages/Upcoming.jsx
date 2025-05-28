@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import dummyData from "../assets/dummydata.json";
 import MatchList from "../components/MatchList";
 
 const Upcoming = () => {

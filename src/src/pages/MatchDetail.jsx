@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
-import dummyData from "../assets/dummydata.json";
 
 const MatchDetail = () => {
   const { id } = useParams();
