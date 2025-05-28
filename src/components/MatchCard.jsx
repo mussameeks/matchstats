@@ -26,7 +26,7 @@ const MatchCard = ({ match }) => {
         <div>{teams.home}</div>
         <div className="text-gray-700">
           {(status === "live" || status === "finished")
-            ? \`\${score.home} - \${score.away}\`
+            ? `${score.home} - ${score.away}`
             : formattedTime}
         </div>
         <div>{teams.away}</div>
@@ -34,7 +34,7 @@ const MatchCard = ({ match }) => {
 
       <div className="text-right mt-2">
         <Link
-          to={\`/match/\${id}\`}
+          to={`/match/${id}`}
           className="text-blue-500 text-sm hover:underline"
         >
           View details →
