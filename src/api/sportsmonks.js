@@ -90,3 +90,30 @@ export const getFinishedMatches = async () => {
     league: match.league?.data?.name || "Unknown",
   }));
 };
+
+
+export const getMatchDetailsWithEvents = async (fixtureId) => {
+  const res = await api.get(`/football/fixtures/${fixtureId}`, {
+    params: {
+      include: "events,localTeam,visitorTeam",
+    },
+  });
+
+  const match = res.data.data;
+  return {
+    id: match.id,
+    teams: {
+      home: match.localTeam.data.name,
+      away: match.visitorTeam.data.name,
+    },
+    startTime: match.time.starting_at.date_time,
+    events: match.events.data.map(event => ({
+      id: event.id,
+      type: event.type,
+      minute: event.minute,
+      player: event.player_name,
+      result: event.result,
+      teamId: event.team_id,
+    })),
+  };
+};
