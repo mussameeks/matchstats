@@ -1,38 +1,42 @@
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getLiveMatches } from "../api/sportsmonks";
+import { getMatchDetailsWithEvents } from "../api/sportsmonks";
 
 const MatchDetail = () => {
   const { id } = useParams();
   const [match, setMatch] = useState(null);
 
   useEffect(() => {
-    const fetchDetails = async () => {
-      try {
-        const data = await getLiveMatches();
-        const selected = data.find(m => m.id === id);
-        setMatch(selected);
-      } catch (err) {
-        console.error("Error loading match detail:", err);
-      }
+    const fetchMatch = async () => {
+      const data = await getMatchDetailsWithEvents(id);
+      setMatch(data);
     };
-
-    fetchDetails();
+    fetchMatch();
   }, [id]);
 
-  if (!match) return <p className="p-6 text-center">Loading match details...</p>;
+  if (!match) return <div>Loading...</div>;
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h2 className="text-xl font-bold mb-2 text-center">{match.teams.home} vs {match.teams.away}</h2>
-      <p className="text-center mb-4"><strong>League:</strong> {match.league}</p>
-      <div className="text-center">
-        <p><strong>Status:</strong> {match.status}</p>
-        {(match.status === "live" || match.status === "finished") && (
-          <p><strong>Score:</strong> {match.score.home} - {match.score.away}</p>
-        )}
-        <p><strong>Start Time:</strong> {new Date(match.startTime).toLocaleString()}</p>
-      </div>
+    <div className="max-w-2xl mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-2">
+        {match.teams.home} vs {match.teams.away}
+      </h1>
+      <p className="text-sm text-gray-600 mb-6">{match.startTime}</p>
+
+      <h2 className="text-xl font-semibold mb-4">Match Events</h2>
+      <ul className="space-y-3">
+        {match.events.map(event => (
+          <li key={event.id} className="border-b pb-2">
+            <div className="flex justify-between items-center">
+              <span className="text-sm text-gray-500">{event.minute}'</span>
+              <span className="capitalize font-medium">{event.type}</span>
+              <span>{event.player}</span>
+              {event.result && <span className="text-xs text-blue-600">{event.result}</span>}
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
