@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { getLiveMatches } from "../api/sportsmonks";
-import MatchList from "../components/MatchList";
+import React, { useEffect, useState } from 'react';
+import { getLiveMatches } from '../api/football';
 
-const Live = () => {
+function Live() {
   const [matches, setMatches] = useState([]);
 
   useEffect(() => {
-    const fetchLive = async () => {
-      try {
-        const data = await getLiveMatches();
-        setMatches(data);
-      } catch (err) {
-        console.error("Error fetching live matches:", err);
-      }
+    const fetchData = async () => {
+      const data = await getLiveMatches();
+      setMatches(data);
     };
-
-    fetchLive();
+    fetchData();
   }, []);
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold text-center mb-4">🔥 Live Matches</h2>
-      <MatchList matches={matches} />
+    <div>
+      <h1 className="text-2xl font-bold mb-4">Live Matches</h1>
+      <ul>
+        {matches.map(match => (
+          <li key={match.fixture.id} className="mb-2">
+            {match.teams.home.name} vs {match.teams.away.name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
 
 export default Live;
